@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 
 const stuffRoutes = require('./routes/stuff')
 const userRoutes = require('./routes/User')
+const path = require('path');
 
 mongoose.connect('mongodb+srv://sa:125@cluster0.retey.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', 
 { useNewUrlParser: true, useUnifiedTopology: true }).then(() => console.log('Connexion à MongoDB réussie !')).catch(() => console.log('Connexion à MongoDB échouée !'))
@@ -18,7 +19,7 @@ app.use((req, res, next) => {
 })
 
 app.use(bodyParser.json())
-
+app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/api/stuff', stuffRoutes)
 app.use('/api/auth', userRoutes)
 
